@@ -1,10 +1,12 @@
 {
-  "name": "medplum-provider",
-  "version": "3.1.0",
+  "name": "kolto-emrr",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
   "scripts": {
     "build": "tsc && vite build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "dev": "vite",
     "preview": "vite preview"
   },
@@ -32,14 +34,15 @@
     "@types/react": "18.2.73",
     "@types/react-dom": "18.2.23",
     "@vitejs/plugin-react": "4.2.1",
+    "chart.js": "4.4.2",
+    "gh-pages": "^6.1.1",
     "postcss": "8.4.38",
     "postcss-preset-mantine": "1.13.0",
     "react": "18.2.0",
+    "react-chartjs-2": "5.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "6.22.3",
     "typescript": "5.4.3",
-    "vite": "5.2.7",
-    "chart.js": "4.4.2",
-    "react-chartjs-2": "5.2.0"    
+    "vite": "5.2.7"
   }
 }
