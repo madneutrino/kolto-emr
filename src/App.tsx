@@ -44,7 +44,7 @@ import { Vaccines } from './pages/health-record/Vaccines';
 import { Vitals } from './pages/health-record/Vitals';
 import { Measurement } from './pages/health-record/Measurement';
 import { Medications } from './pages/health-record/Medications';
-import { BatchPage } from './BatchPage';
+import { BatchPage } from './pages/BatchPage';
 
 export function App(): JSX.Element | null {
   const medplum = useMedplum();

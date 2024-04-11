@@ -2,7 +2,8 @@ import { MockClient } from '@medplum/mock';
 import { MedplumProvider } from '@medplum/react';
 import { MemoryRouter } from 'react-router-dom';
 import { BatchPage } from './BatchPage';
-import { act, fireEvent, render, RenderResult, screen } from './test-utils/render';
+import { act, fireEvent, render, RenderResult, screen } from '../test-utils/render';
+import '@testing-library/jest-dom';
 
 const exampleBundle = `{
   "resourceType": "Bundle",
