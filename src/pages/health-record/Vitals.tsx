@@ -7,7 +7,9 @@ import { usePatient } from '../../hooks/usePatient';
 export function Vitals(): JSX.Element {
   const medplum = useMedplum();
   const patient = usePatient() as Patient;
-  const observations = medplum.searchResources('Observation', 'patient=' + getReferenceString(patient)).read();
+  const observations = medplum
+    .searchResources('Observation', 'patient=' + getReferenceString(patient) + '&_count=100')
+    .read();
 
   return (
     <Document>

@@ -19,20 +19,24 @@ export function Measurement(): JSX.Element | null {
   const [chartData, setChartData] = useState<ChartData<'line', number[]>>();
 
   const observations = medplum
-    .searchResources('Observation', `code=${code}&patient=${getReferenceString(patient)}`)
+    .searchResources(
+      'Observation',
+      `code=${code}&patient=${getReferenceString(patient)}&_count=100&_sort=-_lastUpdated`
+    )
     .read();
 
   useEffect(() => {
     if (observations) {
       const labels: string[] = [];
       const datasets: ChartDataset<'line', number[]>[] = chartDatasets.map((item) => ({ ...item, data: [] }));
+
       for (const obs of observations) {
-        labels.push(formatDate(obs.effectiveDateTime));
+        labels.unshift(formatDate(obs.effectiveDateTime));
         if (chartDatasets.length === 1) {
-          datasets[0].data.push(obs.valueQuantity?.value as number);
+          datasets[0].data.unshift(obs.valueQuantity?.value as number);
         } else {
           for (let i = 0; i < chartDatasets.length; i++) {
-            datasets[i].data.push((obs.component as ObservationComponent[])[i].valueQuantity?.value as number);
+            datasets[i].data.unshift((obs.component as ObservationComponent[])[i].valueQuantity?.value as number);
           }
         }
       }
