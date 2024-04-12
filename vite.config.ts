@@ -1,12 +1,21 @@
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import dns from 'dns';
+import { writeFileSync } from 'fs';
 
 dns.setDefaultResultOrder('verbatim');
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    {
+      name: 'generate-cname',
+      generateBundle() {
+        writeFileSync('dist/CNAME', 'kolto.doctree.app');
+      },
+    },
+    react(),
+  ],
   server: {
     host: 'localhost',
     port: 3000,
