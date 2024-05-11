@@ -45,6 +45,10 @@ import { Vitals } from './pages/health-record/Vitals';
 import { Measurement } from './pages/health-record/Measurement';
 import { Medications } from './pages/health-record/Medications';
 import { BatchPage } from './pages/BatchPage';
+import { EditPage } from './pages/resource/EditPage';
+import { DeletePage } from './pages/resource/DeletePage';
+import { TimelinePage } from './pages/resource/TimelinePage';
+import { ReportPage } from './pages/resource/ReportPage';
 
 export function App(): JSX.Element | null {
   const medplum = useMedplum();
@@ -152,6 +156,10 @@ export function App(): JSX.Element | null {
                 </Route>
                 <Route path=":resourceType/new" element={<CreateResourcePage />} />
                 <Route path=":resourceType/:id" element={<ResourcePage />} />
+                <Route path=":reourceType/report" element={<ReportPage />} />
+                <Route path=":resourceType/:id/edit" element={<EditPage />} />
+                <Route path=":resourceType/:id/delete" element={<DeletePage />} />
+                <Route path=":reourceType/:id/timeline" element={<TimelinePage />} />
                 <Route path=":resourceType" element={<PatientSearchPage />} />
                 <Route path="" element={<TimelineTab />} />
               </Route>
@@ -159,6 +167,9 @@ export function App(): JSX.Element | null {
               <Route path="/batch" element={<BatchPage />} />
               <Route path="/:resourceType/new" element={<CreateResourcePage />} />
               <Route path="/:resourceType/:id" element={<ResourcePage />} />
+              <Route path=":resourceType/:id/edit" element={<EditPage />} />
+              <Route path=":resourceType/:id/delete" element={<DeletePage />} />
+              <Route path=":reourceType/:id/timeline" element={<TimelinePage />} />
               <Route path="/:resourceType/:id/_history/:versionId" element={<ResourcePage />} />
               <Route path="/:resourceType" element={<SearchPage />} />
             </>

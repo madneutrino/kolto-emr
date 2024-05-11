@@ -17,6 +17,7 @@ export function Vitals(): JSX.Element {
       <Table>
         <Table.Thead>
           <Table.Tr>
+            <Table.Th>Date</Table.Th>
             <Table.Th>Measurement</Table.Th>
             <Table.Th>Your Value</Table.Th>
             <Table.Th>Last Updated</Table.Th>
@@ -25,6 +26,7 @@ export function Vitals(): JSX.Element {
         <Table.Tbody>
           {observations.map((obs) => (
             <Table.Tr key={obs.id}>
+              <Table.Td>{formatDate(obs.effectiveDateTime)}</Table.Td>
               <Table.Td>{obs.code?.coding?.[0]?.display}</Table.Td>
               <Table.Td>{formatObservationValue(obs)}</Table.Td>
               <Table.Td>{formatDate(obs.meta?.lastUpdated)}</Table.Td>
