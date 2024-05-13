@@ -5,8 +5,8 @@ import { MockClient } from '@medplum/mock';
 import { ErrorBoundary, Loading, MedplumProvider } from '@medplum/react';
 import { Suspense } from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { AppRoutes } from '../AppRoutes';
-import { act, fireEvent, render, screen } from '../test-utils/render';
+import { App } from '../../App';
+import { act, fireEvent, render, screen } from '../../test-utils/render';
 
 const medplum = new MockClient();
 
@@ -20,7 +20,7 @@ describe('EditPage', () => {
               <Notifications />
               <ErrorBoundary>
                 <Suspense fallback={<Loading />}>
-                  <AppRoutes />
+                  <App />
                 </Suspense>
               </ErrorBoundary>
             </MantineProvider>

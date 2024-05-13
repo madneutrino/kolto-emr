@@ -5,6 +5,9 @@ import { Document, ResourceForm, useMedplum } from '@medplum/react';
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+// This page is exactly the same as './resource/EditPage';
+// except that the parem is patientId instead of id
+// definitely needs to be refactored.
 export function EditTab(): JSX.Element | null {
   const medplum = useMedplum();
   const { patientId } = useParams() as { patientId: string };
@@ -39,13 +42,15 @@ export function EditTab(): JSX.Element | null {
     [medplum, patientId, navigate]
   );
 
+  const handleDelete = useCallback(() => navigate(`/Patient/${patientId}/delete`), [navigate, patientId]);
+
   if (!value) {
     return null;
   }
 
   return (
     <Document>
-      <ResourceForm defaultValue={value} onSubmit={handleSubmit} outcome={outcome} />
+      <ResourceForm defaultValue={value} onSubmit={handleSubmit} onDelete={handleDelete} outcome={outcome} />
     </Document>
   );
 }

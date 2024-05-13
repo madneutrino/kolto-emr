@@ -28,6 +28,7 @@ import { ResourcePage } from './pages/ResourcePage';
 import { SearchPage } from './pages/SearchPage';
 import { SignInPage } from './pages/SignInPage';
 import { EditTab } from './pages/patient/EditTab';
+import { DeleteTab } from './pages/patient/DeleteTab';
 import { EncounterTab } from './pages/patient/EncounterTab';
 import { LabsTab } from './pages/patient/LabsTab';
 import { MedsTab } from './pages/patient/MedsTab';
@@ -138,6 +139,7 @@ export function App(): JSX.Element | null {
               <Route path="/" element={<HomePage />} />
               <Route path="/Patient/:patientId" element={<PatientPage />}>
                 <Route path="edit" element={<EditTab />} />
+                <Route path="delete" element={<DeleteTab />} />
                 <Route path="encounter" element={<EncounterTab />} />
                 <Route path="labs" element={<LabsTab />} />
                 <Route path="meds" element={<MedsTab />} />
