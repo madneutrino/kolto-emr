@@ -47,6 +47,7 @@ import { ResetPasswordPage } from './pages/ResetPasswordPage';
 import { SecurityPage } from './pages/SecurityPage';
 import { SetPasswordPage } from './pages/SetPasswordPage';
 import { ChangePasswordPage } from './pages/ChangePasswordPage';
+import { CreateDocumentReferencePage } from './pages/CreateDocumentReferencePage';
 
 export function AppRoutes(): JSX.Element {
   return (
@@ -63,6 +64,7 @@ export function AppRoutes(): JSX.Element {
         <Route path="meds" element={<MedsTab />} />
         <Route path="tasks" element={<TasksTab />} />
         <Route path="timeline" element={<TimelineTab />} />
+        <Route path="DocumentReference/new" element={<CreateDocumentReferencePage />} />
         <Route path="health-record/*" element={<HealthRecord />}>
           <Route index element={<Navigate replace to="health-record/lab-results" />} />
           <Route path="lab-results/*" element={<LabResults />} />
