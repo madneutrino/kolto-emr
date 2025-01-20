@@ -1,5 +1,5 @@
-<h1 align="center">Kolto EMR</h1>
-<p align="center">A scaffolding to build an EMR for Kolto, based on the Medplum. We use the charting example as a base, with aspects of foomedical example added in</p>
+<h1 align="center">Elyx EMR</h1>
+<p align="center">A scaffolding to build an EMR for Elyx, based on the Medplum. We use the charting example as a base, with aspects of foomedical example added in</p>
 <p align="center">
 <a href="https://github.com/medplum/medplum-hello-world/blob/main/LICENSE.txt">
     <img src="https://img.shields.io/badge/license-Apache-blue.svg" />
@@ -69,6 +69,10 @@ This app should run on `http://localhost:3000/`
 [Medplum](https://www.medplum.com/) is an open-source, API-first EHR. Medplum makes it easy to build healthcare apps quickly with less code.
 
 - Read our [documentation](https://www.medplum.com/docs)
+
+### Deploying to GCP
+
+APP_BUCKET=medplum-app-elyx-emr ./deploy-app-gcp.sh
 
 ##TODO
 
