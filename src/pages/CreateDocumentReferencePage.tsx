@@ -70,7 +70,7 @@ export function CreateDocumentReferencePage(): JSX.Element {
   const displayElements =
     typeSchema?.elements &&
     Object.entries(typeSchema?.elements).filter(([key, element]) =>
-      ['category', 'description', 'content', 'date'].includes(key)
+      ['content', 'date', 'type', 'category', 'description'].includes(key)
     );
 
   return (
