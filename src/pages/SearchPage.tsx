@@ -9,7 +9,7 @@ import {
   SortRule,
 } from '@medplum/core';
 import { Patient, Reference, Resource, UserConfiguration } from '@medplum/fhirtypes';
-import { Loading, MemoizedSearchControl, useMedplum } from '@medplum/react';
+import { Loading, SearchControl, useMedplum } from '@medplum/react';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import classes from './SearchPage.module.css';
@@ -42,7 +42,7 @@ export function SearchPage(): JSX.Element {
 
   return (
     <Paper shadow="xs" m="md" p="xs" className={classes.paper}>
-      <MemoizedSearchControl
+      <SearchControl
         checkboxesEnabled={true}
         search={search}
         onClick={(e) => navigate(getResourceUrl(e.resource))}
