@@ -43,7 +43,7 @@ const tabs = [
   },
   {
     id: 'documentreference',
-    url: 'DocumentReference?_fields=date,category,type,description,content&_offset=0&_sort=-_lastUpdated&patient=%patient.id',
+    url: 'DocumentReference?_fields=date,category,type,description&_offset=0&_sort=-_lastUpdated&patient=%patient.id',
     label: 'Documents',
   },
   {
