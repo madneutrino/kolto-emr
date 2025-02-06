@@ -2,7 +2,6 @@ import { ProfileResource, getReferenceString } from '@medplum/core';
 import {
   AppShell,
   Loading,
-  Logo,
   NotificationIcon,
   useMedplum,
   useMedplumNavigate,
@@ -24,6 +23,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { ResetPasswordPage } from './pages/ResetPasswordPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { SignInPage } from './pages/SignInPage';
+import { Logo } from './components/Logo';
 
 export function App(): JSX.Element | null {
   const medplum = useMedplum();
@@ -36,7 +36,7 @@ export function App(): JSX.Element | null {
 
   return (
     <AppShell
-      logo={<Logo size={24} />}
+      logo={<Logo size={32} />}
       menus={[
         {
           title: 'Charts',
