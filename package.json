@@ -1,6 +1,6 @@
 {
   "name": "elyx-emr",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "private": true,
   "type": "module",
   "scripts": {
@@ -25,12 +25,11 @@
     "@mantine/dropzone": "7.16.1",
     "@mantine/hooks": "7.16.1",
     "@mantine/notifications": "7.16.1",
-    "@medplum/core": "^3.2.27",
-    "@medplum/eslint-config": "3.2.27",
-    "@medplum/fhirtypes": "3.2.27",
-    "@medplum/mock": "3.2.27",
-    "@medplum/react": "3.2.27",
-    "@medplum/react-hooks": "3.2.27",
+    "@medplum/core": "^3.2.31",
+    "@medplum/eslint-config": "3.2.31",
+    "@medplum/fhirtypes": "3.2.31",
+    "@medplum/mock": "3.2.31",
+    "@medplum/react-hooks": "3.2.31",
     "@tabler/icons-react": "3.17.0",
     "@testing-library/jest-dom": "6.6.3",
     "@testing-library/react": "16.1.0",
@@ -53,5 +52,8 @@
     "react-router-dom": "6.28.0",
     "typescript": "^5.7.3",
     "vite": "^6.0.8"
+  },
+  "dependencies": {
+    "@medplum/react": "^3.2.31"
   }
 }
