@@ -9,6 +9,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { App } from './App';
+import favicon from './img/favicon-light.ico'
 
 const medplum = new MedplumClient({
   onUnauthenticated: () => (window.location.href = '/'),
@@ -52,3 +53,9 @@ root.render(
     </MedplumProvider>
   </StrictMode>
 );
+
+// Add this to dynamically set the favicon
+const link = document.createElement('link')
+link.rel = 'icon'
+link.href = favicon
+document.head.appendChild(link)

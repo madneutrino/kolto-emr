@@ -24,6 +24,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { ResetPasswordPage } from './pages/ResetPasswordPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { SignInPage } from './pages/SignInPage';
+import { Header } from './components/Header';
 
 export function App(): JSX.Element | null {
   const medplum = useMedplum();
@@ -106,6 +107,7 @@ export function App(): JSX.Element | null {
         )
       }
     >
+      <Header />
       <Suspense fallback={<Loading />}>
         {profile ? (
           <AppRoutes />
