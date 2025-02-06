@@ -24,6 +24,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { usePatient } from '../../hooks/usePatient';
 import { prependPatientPath } from './PatientPage.utils';
 import { useDisclosure } from '@mantine/hooks';
+import styles from './PatientSearchPage.module.css';
 
 export function PatientSearchPage(): JSX.Element {
   const medplum = useMedplum();
@@ -81,7 +82,7 @@ export function PatientSearchPage(): JSX.Element {
       <Modal
         opened={opened}
         onClose={close}
-        size="90%"
+        size="100%"
         styles={{
           body: {
             maxWidth: '100%',
@@ -124,7 +125,7 @@ function ResourceViewer({ resource }: ResourceViewerProps): JSX.Element {
 
     return (
       <Container size={"100%"}>
-        <Panel key={`${getReferenceString(resource)}`}>
+        <Panel key={`${getReferenceString(resource)}`} className={styles.documentReferenceViewer}>
           <Title mb="md">{`${category} - ${type}`}</Title>
           {resource.content?.map((content, index) => (
           <div key={index}>
