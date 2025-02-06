@@ -24,6 +24,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { usePatient } from '../../hooks/usePatient';
 import { prependPatientPath } from './PatientPage.utils';
 import { useDisclosure } from '@mantine/hooks';
+import { ResourceViewer } from './ResourceViewer';
 import styles from './PatientSearchPage.module.css';
 
 export function PatientSearchPage(): JSX.Element {
@@ -66,7 +67,6 @@ export function PatientSearchPage(): JSX.Element {
           onClick={(e) => {
             setSelectedResource(e.resource);
             open();
-            // navigate(`/Patient/${patient.id}/${e.resource.resourceType}/${e.resource.id}`)
           }}
           onAuxClick={(e) =>
             window.open(`/Patient/${patient.id}/${e.resource.resourceType}/${e.resource.id}`, '_blank')
@@ -112,37 +112,4 @@ function addSearchValues(patient: Patient, search: SearchRequest): SearchRequest
     offset,
     count,
   };
-}
-
-interface ResourceViewerProps {
-  resource: Resource;
-}
-
-function ResourceViewer({ resource }: ResourceViewerProps): JSX.Element {
-  if (resource.resourceType === 'DocumentReference') {
-    const category = resource.category?.[0]?.coding?.[0]?.display || 'Uncategorized';
-    const type = resource.type?.coding?.[0]?.display || 'Unknown Type';
-
-    return (
-      <Container size={"100%"}>
-        <Panel key={`${getReferenceString(resource)}`} className={styles.documentReferenceViewer}>
-          <Title mb="md">{`${category} - ${type}`}</Title>
-          {resource.content?.map((content, index) => (
-          <div key={index}>
-              <ResourcePropertyDisplay value={resource.date} propertyType={'dateTime'} />
-            {content.attachment && <AttachmentDisplay value={content.attachment} />}
-              <Text>{resource.description}</Text>
-            </div>
-          ))}
-          </Panel>
-      </Container>
-    );
-  }
-
-  return (
-    <Document key={getReferenceString(resource)}>
-      <Title>{getDisplayString(resource)}</Title>
-        <ResourceTable key={`${resource.resourceType}/${resource.id}`} value={resource} />
-    </Document>
-  );
 }
