@@ -10,8 +10,10 @@ import {
 import { Patient, Resource } from '@medplum/fhirtypes';
 import {
   AttachmentDisplay,
+  Container,
   Document,
   Loading,
+  Panel,
   ResourcePropertyDisplay,
   ResourceTable,
   SearchControl,
@@ -76,8 +78,18 @@ export function PatientSearchPage(): JSX.Element {
           }}
         />
       </Paper>
-      <Modal opened={opened} onClose={close}>
-        {selectedResource && <ResourceViewer resource={selectedResource} />}
+      <Modal
+        opened={opened}
+        onClose={close}
+        size="90%"
+        styles={{
+          body: {
+            maxWidth: '100%',
+            height: '90vh',
+          }
+        }}
+      >
+          {selectedResource && <ResourceViewer resource={selectedResource} />}
       </Modal>
     </>
   );
@@ -111,23 +123,25 @@ function ResourceViewer({ resource }: ResourceViewerProps): JSX.Element {
     const type = resource.type?.coding?.[0]?.display || 'Unknown Type';
 
     return (
-      <Document key={getReferenceString(resource)}>
-        <Title>{`${category} - ${type}`}</Title>
-        {resource.content?.map((content, index) => (
+      <Container size={"100%"}>
+        <Panel key={`${getReferenceString(resource)}`}>
+          <Title mb="md">{`${category} - ${type}`}</Title>
+          {resource.content?.map((content, index) => (
           <div key={index}>
-            <ResourcePropertyDisplay value={resource.date} propertyType={'dateTime'} />
+              <ResourcePropertyDisplay value={resource.date} propertyType={'dateTime'} />
             {content.attachment && <AttachmentDisplay value={content.attachment} />}
-            <Text>{resource.description}</Text>
-          </div>
-        ))}
-      </Document>
+              <Text>{resource.description}</Text>
+            </div>
+          ))}
+          </Panel>
+      </Container>
     );
   }
 
   return (
     <Document key={getReferenceString(resource)}>
       <Title>{getDisplayString(resource)}</Title>
-      <ResourceTable key={`${resource.resourceType}/${resource.id}`} value={resource} />
+        <ResourceTable key={`${resource.resourceType}/${resource.id}`} value={resource} />
     </Document>
   );
 }
