@@ -76,5 +76,5 @@ APP_BUCKET=medplum-app-elyx-emr ./deploy-app-gcp.sh
 
 ##TODO
 
-- figure out how to fetch data to show the measurements.
+- Medplum cli doesnt work, because we havent added the oauth endpoints in the frontend. We can use the admin app to complete the oauth loop.
 -

@@ -48,6 +48,7 @@ import { SecurityPage } from './pages/SecurityPage';
 import { SetPasswordPage } from './pages/SetPasswordPage';
 import { ChangePasswordPage } from './pages/ChangePasswordPage';
 import { CreateDocumentReferencePage } from './pages/CreateDocumentReferencePage';
+import { AuditEventPage } from './pages/resource/AuditEventPage';
 
 export function AppRoutes(): JSX.Element {
   return (
@@ -82,6 +83,7 @@ export function AppRoutes(): JSX.Element {
         <Route path=":resourceType/:id/edit" element={<EditPage />} />
         <Route path=":resourceType/:id/delete" element={<DeletePage />} />
         <Route path=":reourceType/:id/timeline" element={<TimelinePage />} />
+        <Route path=":resourceType/:id/event" element={<AuditEventPage />} />
         <Route path=":resourceType" element={<PatientSearchPage />} />
         <Route path="" element={<TimelineTab />} />
       </Route>
@@ -104,7 +106,9 @@ export function AppRoutes(): JSX.Element {
       <Route path="/onboarding" element={<OnboardingPage />} />
       <Route path="/batch" element={<BatchPage />} />
       <Route path="/:resourceType/new" element={<CreateResourcePage />} />
-      <Route path="/:resourceType/:id" element={<ResourcePage />} />
+      <Route path="/:resourceType/:id" element={<ResourcePage />} >
+        <Route path="event" element={<AuditEventPage />} />
+      </Route>
       <Route path=":resourceType/:id/edit" element={<EditPage />} />
       <Route path=":resourceType/:id/delete" element={<DeletePage />} />
       <Route path=":reourceType/:id/timeline" element={<TimelinePage />} />
