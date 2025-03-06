@@ -23,3 +23,10 @@ package-lock.json
 *.njsproj
 *.sln
 *.sw?
+
+#Env vars
+.env
+.env.local
+.env.development
+.env.test
+.env.production

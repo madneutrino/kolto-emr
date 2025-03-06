@@ -54,6 +54,7 @@ export function AppRoutes(): JSX.Element {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/signin" element={<SignInPage />} />
       <Route path="/setpassword/:id/:secret" element={<SetPasswordPage />} />
       <Route path="/changepassword" element={<ChangePasswordPage />} />
       <Route path="/security" element={<SecurityPage />} />
