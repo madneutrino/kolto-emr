@@ -20,8 +20,10 @@ export function CreateDocumentReferencePage(): JSX.Element {
   const medplum = useMedplum();
   const patient = usePatient();
   const navigate = useNavigate();
+  const { id } = useParams();
   const resourceType = 'DocumentReference';
   const [outcome, setOutcome] = useState<OperationOutcome | undefined>();
+
   const defaultResource = {
     resourceType,
     status: 'current',
@@ -29,26 +31,31 @@ export function CreateDocumentReferencePage(): JSX.Element {
       reference: `Patient/${patient?.id}`,
     },
   } as Partial<DocumentReference>;
-  const defaultValue = useResource<DocumentReference>(defaultResource);
+
+  const existingResource = useResource<DocumentReference>(id ? { reference: `DocumentReference/${id}` } : undefined);
+  const defaultValue = useResource<DocumentReference>(id ? undefined : defaultResource);
   const [value, setValue] = useState<DocumentReference>();
 
-  // If we are creating custom profiles, we need to pass the custom profile url in.
   const typeSchema = useMemo(() => tryGetDataType(resourceType), [resourceType]);
 
   useEffect(() => {
-    // Is this the right way to do this? Unclear why defaultValue could be undefined
-    // I think we have enough info here to make sure it's defined.
-    if (defaultValue) {
+    if (id && existingResource) {
+      setValue(existingResource);
+    } else if (defaultValue) {
       setValue(defaultValue);
     }
-  }, [defaultValue]);
+  }, [defaultValue, existingResource, id]);
 
   const handleSubmit = (newResource: Resource): void => {
     if (outcome) {
       setOutcome(undefined);
     }
-    medplum
-      .createResource(newResource)
+
+    const promise = id
+      ? medplum.updateResource(newResource)
+      : medplum.createResource(newResource);
+
+    promise
       .then((result) => navigate(prependPatientPath(patient, '/' + result.resourceType + '/' + result.id)))
       .catch((err) => {
         if (setOutcome) {
@@ -76,7 +83,7 @@ export function CreateDocumentReferencePage(): JSX.Element {
   return (
     <Document shadow="xs">
       <Stack>
-        <Text fw={500}>New&nbsp; Document</Text>
+        <Text fw={500}>{id ? 'Edit' : 'New'} Document</Text>
         <form
           noValidate
           autoComplete="off"
@@ -95,7 +102,6 @@ export function CreateDocumentReferencePage(): JSX.Element {
                 htmlFor={key}
                 outcome={outcome}
                 fhirPath={resourceType + '.' + key}
-                // errorExpression={valuePath}
                 readonly={true}
               >
                 {element && (
@@ -104,9 +110,7 @@ export function CreateDocumentReferencePage(): JSX.Element {
                     property={element}
                     name={key}
                     path={resourceType + '.' + key}
-                    // valuePath={valuePath}
-                    defaultValue=""
-                    // defaultPropertyType={propertyType}
+                    defaultValue={value[key as keyof DocumentReference]}
                     onChange={(newValue: any, propName?: string) => {
                       setValue(setPropertyValue({ ...value }, key, propName ?? key, element, newValue));
                     }}
@@ -117,7 +121,7 @@ export function CreateDocumentReferencePage(): JSX.Element {
             ))}
           </Stack>
           <Group justify="flex-end" mt="xl" wrap="nowrap" gap={0}>
-            <Button type="submit">{defaultValue?.id ? 'Update' : 'Create'}</Button>
+            <Button type="submit">{id ? 'Update' : 'Create'}</Button>
           </Group>
         </form>
         <hr />
@@ -125,7 +129,11 @@ export function CreateDocumentReferencePage(): JSX.Element {
         <center>---------Everything below is for troubleshooting-----</center>
         <hr />
         <hr />
-        <ResourceForm defaultValue={defaultResource} onSubmit={handleSubmit} outcome={outcome} />
+        <ResourceForm
+          defaultValue={(id && existingResource) ? existingResource : defaultResource}
+          onSubmit={handleSubmit}
+          outcome={outcome}
+        />
       </Stack>
     </Document>
   );

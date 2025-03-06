@@ -82,6 +82,7 @@ export function AppRoutes(): JSX.Element {
         <Route path=":resourceType/:id" element={<ResourcePage />} />
         <Route path=":reourceType/report" element={<ReportPage />} />
         <Route path=":resourceType/:id/edit" element={<EditPage />} />
+        <Route path="DocumentReference/:id/edit" element={<CreateDocumentReferencePage />} />
         <Route path=":resourceType/:id/delete" element={<DeletePage />} />
         <Route path=":reourceType/:id/timeline" element={<TimelinePage />} />
         <Route path=":resourceType/:id/event" element={<AuditEventPage />} />
